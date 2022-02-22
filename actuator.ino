@@ -406,6 +406,7 @@ void left()
 
   linear_flg = 0;
   rotary_flg = 1;
+
   set_speed_left = 0;
   set_speed_right = 0;
 
@@ -419,10 +420,10 @@ void left()
   digitalWrite(pin_right_bwd, 0);
   delay(10);
 
-  digitalWrite(pin_left_fwd, 0); // run motor run backward
+  digitalWrite(pin_left_fwd, 0); // run motor run forward
   digitalWrite(pin_left_bwd, 1);
 
-  digitalWrite(pin_right_fwd, 1); // run motor run forward
+  digitalWrite(pin_right_fwd, 1); // run motor run backward
   digitalWrite(pin_right_bwd, 0);
 
   if ((cmd_received == 1) && (lft || rht))
@@ -430,7 +431,6 @@ void left()
     ledcSetup(PWM_ch_left, freq, resolution);
     ledcAttachPin(pin_left_pwm, PWM_ch_left);
     ledcWrite(PWM_ch_left, 255);
-    
 
     ledcSetup(PWM_ch_right, freq, resolution);
     ledcAttachPin(pin_right_pwm, PWM_ch_right);
@@ -444,7 +444,6 @@ void left()
     }
   }
   delay(10);
-
   if (cmd_received != 1)
   {
     if ((l_cnt > 1) && (r_cnt > 1) && (lft || rht))
